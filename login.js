@@ -15,6 +15,9 @@ import {
   signOut,
   onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+
+import showdata from "./index.js";
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDRf3sxviP4ToOVHI09JJ92S2KqeXR22zw",
@@ -54,8 +57,8 @@ function getCurrentURL() {
 onAuthStateChanged(auth, (user) => {
   console.log(user);
   if (user) {
-   
-    
+    showdata();
+
     const dbRef = ref(getDatabase());
     get(child(dbRef, `loginuser/${user.uid}`))
       .then((snapshot) => {
@@ -83,15 +86,11 @@ onAuthStateChanged(auth, (user) => {
     }
     // no need because of by default firebase rule
     if (getCurrentURL() == "http://127.0.0.1:5500/login.html") {
-      setTimeout(() => {
-        window.location.href = "index.html";
-      }, 5000);
+      window.location.href = "index.html";
     }
     if (getCurrentURL() == "http://127.0.0.1:5500/register.html") {
       // window.location.href = "index.html";
-      setTimeout(() => {
-        window.location.href = "index.html";
-      }, 5);
+      window.location.href = "index.html";
     }
     // ...
   } else {

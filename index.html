@@ -10,9 +10,7 @@
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="index.css">
 </head>
-
 <body >
-
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +47,7 @@
 <div class="container justify-content-center align-items-center d-none" id="loader">
   <img src="loader.gif" alt="">
 </div>
-<div class="container d-none" id="logincol">
+<div class="container loginonload" id="logincol">
   <h1>Login to add your data</h1>
   <button type="button" class="btn btn-dark"><a href="login.html" class="text-white">Login</a></button>
 </div>
@@ -61,7 +59,7 @@
     Collecting Data
   </h1>
   <form class="container" id="contactForm">
-    <div class="card">
+    <div class="card"  style="padding: 15px; ">
       <div class="card-body">
         <div class="form-group">
           <label for="exampleFormControlInput1">
@@ -79,7 +77,7 @@
           <input type="text" class="form-control" id="email" placeholder="message here">
         </div>
       </div>
-      <button type="submit" class="btn btn-primary" style="margin-left: 15px; margin-top: 10px">
+      <button type="submit" class="btn btn-dark" style="padding: 10px;">
         Submit
       </button>
     </div>
@@ -87,13 +85,21 @@
 
 
   <div class="container">
-    <button id="show" type="submit" class="btn btn-primary" style="margin-left: 15px; margin-top: 10px">
+    <button id="show" type="submit" class="btn btn-dark" style="margin-left: 15px; margin-top: 10px">
       show
     </button>
-    <button type="submit" id="update" class="btn btn-primary" style="margin-left: 15px; margin-top: 10px">
+    <button type="submit" id="update" class="btn btn-dark" style="margin-left: 15px; margin-top: 10px">
           Update
       </button>
-    
+   
+      <div class="container " id="data">
+        <h2>Data</h2>
+        <ul id="MyUl" class="myuls">
+          <li class="dataId">ss</li>
+        </ul>
+      </div>
+      
+
   </div>
   </div>
   <!--   <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"> -->
@@ -101,115 +107,7 @@
   <script type="module" src="login.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-  <script src="index.js" type="module">
-    // Import the functions you need from the SDKs you need
-    import {initializeApp} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-    import {getDatabase, ref, set, get, child, update, remove} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-
-//     // Your web app's Firebase configuration
-//     const firebaseConfig = {
-//       apiKey: "AIzaSyDRf3sxviP4ToOVHI09JJ92S2KqeXR22zw",
-//       authDomain: "js-test-app-efb02.firebaseapp.com",
-//       databaseURL: "https://js-test-app-efb02-default-rtdb.firebaseio.com",
-//       projectId: "js-test-app-efb02",
-//       storageBucket: "js-test-app-efb02.appspot.com",
-//       messagingSenderId: "977248300793",
-//       appId: "1:977248300793:web:0deb7d3299be4da9493c28"
-//     };
-
-//     // Initialize Firebase
-//     const app = initializeApp(firebaseConfig);
-
-
-//     const db = getDatabase();
-//     console.log(db)
-
-
-//     const name = document.getElementById("name");
-//     const email = document.getElementById("email");
-//     const show = document.getElementById("show");
-//     const updateBtn = document.getElementById("update");
-
-//     document.getElementById('contactForm')
-//       .addEventListener('submit', submitForm);
-
-//     show.addEventListener('click', showdata);
-//     updateBtn.addEventListener('click', updatedata);
-
-//     // get data from Firebase 
-//     function showdata(e) {
-//       e.preventDefault();
-//       console.log("function call")
-//       const dbref = ref(db);
-
-
-//       get(child(dbref, 'users/' + name.value)).then((snapshot) => {
-//         if(name.value.length > 0 && email.value.length > 0){
-//             if (snapshot.exists()) {
-//               console.log(snapshot.val().Name + " " + snapshot.val().Email)
-//               document.getElementById('contactForm').reset();
-//             }
-//             else {
-//               alert("no data exist");
-              
-//             }
-//         }
-//         else{
-//             alert("Fill name or email pls")
-//         }
-//       })
-//         .catch((err) => {
-//           alert("unsuccessful data" + err)
-//         })
-//     }
-
-// // put or create data from Firebase 
-//     function submitForm(e) {
-//       e.preventDefault();
-//       const uid = parseInt(Math.random() * 1000000000, 10);
-
-
-//       if (name.value.length > 0 && email.value.length > 0) {
-//         set(ref(db, 'users/' + name.value), {
-//           Name: name.value,
-//           Email: email.value,
-//           message: "datasaved"
-//         })
-//           .then(() => {
-//             alert("data stored sucessfully")
-//             document.getElementById('contactForm').reset();
-//           })
-//           .catch((err) => {
-//             alert("data not stored")
-//           })
-//       }
-//       else {
-//         alert("Fill name or email pls")
-//       }
-//     }
-
-// function updatedata(e) {
-//       e.preventDefault();
-//       console.log("function call")
-
-//       update(ref(db, 'users/' + name.value),{
-//           Name: name.value,
-//           Email: email.value,
-//           message: "dataUpdated"
-//       }).then(() => {
-//         alert("Data updated successfully");
-//         document.getElementById('contactForm').reset();
-//       })
-//     .catch((err) => {
-//           alert("unsuccessful data update" + err)
-//         })
-//     }
-
-
-
-  </script>
+  <script src="index.js" type="module"></script>
 
 
 

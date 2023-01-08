@@ -15,6 +15,22 @@
     scroll-behavior: smooth;
 }
 
+.loginonload{
+    display: none;
+}
+
+#MyUl li{
+    display: flex;
+}
+#MyUl li p{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+
 .contextmenu {
     box-shadow: inset 1px 1px 2px;
     position: fixed;
