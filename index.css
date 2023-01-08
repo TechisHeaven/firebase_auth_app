@@ -1,0 +1,143 @@
+:root {
+    --bg-main-color: #0b131e;
+    --tiles-color: #202b3b;
+    --text-colors: #c4cad3;
+    --secondary-color: #b8b8b8;
+    --subheading-color: #868686;
+    --dark-text-color: #202b3b;
+    --tiles-light-color: #eaecef;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+.contextmenu {
+    box-shadow: inset 1px 1px 2px;
+    position: fixed;
+    display: none;
+    width: 400px;
+    height: 4em;
+    margin-top: 5em;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2em;
+    transition: 1s;
+    flex-direction: row;
+    gap: 20px;
+    right: -500px;
+    background: rgba(32, 43, 59, 0.42);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(9.1px);
+    -webkit-backdrop-filter: blur(9.1px);
+    border: 1px solid rgba(32, 43, 59, 0.6);
+}
+
+
+
+.contextmenu i {
+    color: var(--tiles-light-color);
+    font-size: 1.5em;
+}
+
+.contextmenu.active {
+    display: flex;
+    right: 0px;
+    animation: toaster 0.2s ease-in forwards;
+}
+
+
+
+@keyframes toaster {
+    0% {
+        transform: translateX(-20px);
+        right: 0px;
+    }
+
+    40% {
+        transform: translateX(0px);
+    }
+
+    80% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(-20px);
+    }
+}
+
+
+
+
+
+.contextmenu.active.trans {
+    animation: trans 0.4s ease forwards;
+}
+
+
+
+@keyframes trans {
+    0% {
+        transform: translateX(-20px);
+    }
+
+    80% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(-20px);
+        right: -500px;
+    }
+}
+
+
+
+
+.contextmenu::before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 5px;
+    bottom: 0px;
+    right: 0px;
+    background-color: var(--tiles-light-color);
+    animation: progress 3s linear forwards;
+}
+
+
+@keyframes progress {
+    from {
+        width: 0px;
+    }
+
+    to {
+        width: 400px;
+    }
+}
+
+
+
+.closecontextbtn {
+    background-color: var(--tiles-light-color);
+    color: var(--text-colors);
+    /* padding: .8em; */
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 2em;
+    width: 2em;
+}
+
+
+#closeContextbtn1 {
+    font-size: 1.5em;
+    color: var(--tiles-light-color);
+    margin-bottom: 0;
+}
