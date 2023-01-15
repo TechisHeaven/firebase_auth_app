@@ -25,9 +25,7 @@ import {
   deleteDoc,
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
 
-const uid = sessionStorage.getItem("firebase_user_id");
-
-console.log(uid);
+let uid = sessionStorage.getItem("firebase_user_id");
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -52,23 +50,32 @@ const show = document.getElementById("show");
 const updateBtn = document.getElementById("update");
 
 document.getElementById("contactForm").addEventListener("submit", submitForm);
+if (show) {
+  show.addEventListener("click", showdata);
+}
+if (updateBtn) {
+  updateBtn.addEventListener("click", updatedata);
+}
 
-show.addEventListener("click", showdata);
-updateBtn.addEventListener("click", updatedata);
-
-const coldata = document.getElementById("coldata");
+const coldatamain = document.getElementById("coldatamain");
 const logincol = document.getElementById("logincol");
 
-if (uid == "") {
-  coldata.classList.add("d-none");
-  // logincol.classList.remove("d-none");
-  logincol.style.display = "flex";
-  // sessionStorage.removeItem('firebase_user_id');
-} else {
-  coldata.classList.remove("d-none");
-  // logincol.classList.add("d-none");
-  logincol.style.display = "none";
+
+
+if (getCurrentURL()== "http://127.0.0.1:5500/index.html") {
+  if (uid !== null) {
+    coldatamain.classList.add('d-flex')
+    coldatamain.classList.remove("d-none");
+    // logincol.classList.add("d-none");
+    logincol.style.display = "none";
+  }else {
+    coldatamain.classList.add("d-none");
+    coldatamain.classList.remove("d-flex");
+    logincol.style.display = "flex";
+  }
 }
+
+
 
 let data = document.getElementById("data");
 
@@ -130,7 +137,6 @@ let counter = time;
 function getCurrentURL() {
   return window.location.href;
 }
-console.log(getCurrentURL());
 
 if (getCurrentURL() == "http://127.0.0.1:5500/register.html") {
   submitbtn.addEventListener("click", submitForm);
@@ -201,7 +207,6 @@ function updatedata(e) {
 
 function indexget(){
   setTimeout(() => {
-    console.log("indexget fun call")
     const listitemul = document.getElementById("MyUl");
     
     const removebtn = document.getElementsByClassName("removebtn");
@@ -236,7 +241,6 @@ function indexget(){
 
 
 function removeData(e) {
-  console.log(e);
   const dataId = document.getElementsByClassName('dataId')[e].innerHTML;
   let matches = dataId.match(/(\d+)/);
   console.log(matches[0]);
@@ -276,54 +280,54 @@ logoutuser.addEventListener("click", (e) => {
 const contextmenu = document.getElementsByClassName("contextmenu");
 const closeContextbtn1 = document.getElementById("closeContextbtn1");
 
-function showloader() {
-  loader.classList.remove("d-none");
-  loader.classList.add("d-flex");
-  coldata.classList.remove("d-flex");
-  coldata.classList.add("d-none");
+// function showloader() {
+//   loader.classList.remove("d-none");
+//   loader.classList.add("d-flex");
+//   coldata.classList.remove("d-flex");
+//   coldata.classList.add("d-none");
 
-  const timeout = setTimeout(addClass, 3000);
-  const timeout2 = setTimeout(addClass2, 4000);
+//   const timeout = setTimeout(addClass, 3000);
+//   const timeout2 = setTimeout(addClass2, 4000);
 
-  context.classList.add("active");
-  function addClass() {
-    context.classList.add("trans");
-  }
+//   context.classList.add("active");
+//   function addClass() {
+//     context.classList.add("trans");
+//   }
 
-  function addClass2() {
-    context.classList.remove("active");
-    context.classList.remove("trans");
-  }
-  closeContextbtn1.addEventListener("click", function () {
-    clearTimeout(timeout, timeout2);
-    context.classList.remove("active");
-    context.classList.remove("trans");
-  });
-}
+//   function addClass2() {
+//     context.classList.remove("active");
+//     context.classList.remove("trans");
+//   }
+//   closeContextbtn1.addEventListener("click", function () {
+//     clearTimeout(timeout, timeout2);
+//     context.classList.remove("active");
+//     context.classList.remove("trans");
+//   });
+// }
 
-function hideloader() {
-  loader.classList.remove("d-flex");
-  loader.classList.add("d-none");
-  coldata.classList.add("d-flex");
-  coldata.classList.remove("d-none");
+// function hideloader() {
+//   loader.classList.remove("d-flex");
+//   loader.classList.add("d-none");
+//   coldata.classList.add("d-flex");
+//   coldata.classList.remove("d-none");
 
-  const timeout = setTimeout(addClass, 3000);
-  const timeout2 = setTimeout(addClass2, 4000);
+//   const timeout = setTimeout(addClass, 3000);
+//   const timeout2 = setTimeout(addClass2, 4000);
 
-  context.classList.add("active");
-  function addClass() {
-    context.classList.add("trans");
-  }
+//   context.classList.add("active");
+//   function addClass() {
+//     context.classList.add("trans");
+//   }
 
-  function addClass2() {
-    context.classList.remove("active");
-    context.classList.remove("trans");
-  }
-  closeContextbtn1.addEventListener("click", function () {
-    clearTimeout(timeout, timeout2);
-    context.classList.remove("active");
-    context.classList.remove("trans");
-  });
-}
+//   function addClass2() {
+//     context.classList.remove("active");
+//     context.classList.remove("trans");
+//   }
+//   closeContextbtn1.addEventListener("click", function () {
+//     clearTimeout(timeout, timeout2);
+//     context.classList.remove("active");
+//     context.classList.remove("trans");
+//   });
+// }
 
 export default showdata;

@@ -29,11 +29,15 @@ const firebaseConfig = {
   appId: "1:977248300793:web:0deb7d3299be4da9493c28",
 };
 
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 const db = getDatabase();
 console.log(db);
+
+window.onload = ()=>onAuthStateChanged
+
 
 let createUserbtn = document.getElementById("registerBtn");
 
@@ -55,10 +59,9 @@ function getCurrentURL() {
   return window.location.href;
 }
 onAuthStateChanged(auth, (user) => {
-  console.log(user);
+  // console.log(user);
   if (user) {
     showdata();
-
     const dbRef = ref(getDatabase());
     get(child(dbRef, `loginuser/${user.uid}`))
       .then((snapshot) => {
@@ -93,16 +96,26 @@ onAuthStateChanged(auth, (user) => {
       window.location.href = "index.html";
     }
     // ...
-  } else {
+  } 
+  // else statement here ----------------------------------------
+  
+  else {
+    console.log("not logged in ")
     sessionStorage.removeItem("firebase_user_id");
     console.log(getCurrentURL());
+
     // User is signed out
-    if (!getCurrentURL() == "http://127.0.0.1:5500/login.html") {
-      window.location.replace("login.html");
+    if (getCurrentURL()!= "http://127.0.0.1:5500/login.html") {
+      // window.location.replace("index.html");
     }
     // ...
   }
 });
+
+
+
+
+
 
 const regfullname = document.getElementById("regfullname");
 const email = document.getElementById("regemail");
@@ -140,6 +153,11 @@ if (getCurrentURL() == "http://127.0.0.1:5500/register.html") {
   }
 }
 
+
+
+
+
+
 // login & sign in user ---------------------------------
 async function loginuser(e) {
   const email = document.getElementById("logemail").value;
@@ -158,7 +176,10 @@ async function loginuser(e) {
       update(ref(db, "loginuser/" + user.uid), {
         last_login: dt,
       });
+      let fb = sessionStorage.setItem("firebase_user_id2", user.uid);
+      console.log(fb)
       alert("User Logged in successfully");
+      
       window.location.href = "index.html";
       console.log("User Logged in successfully");
       document.getElementById("contactForm").reset();
@@ -173,8 +194,7 @@ async function loginuser(e) {
       if (errorCode == "auth/user-not-found") {
         alert("User not found");
       }
-      if (condition) {
-      }
+
       alert(errorCode);
 
       // alert(errorMessage);
